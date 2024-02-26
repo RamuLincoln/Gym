@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+   {% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'membership.css')}}">
+   {% endblock %}
+   {% block title %}<title>Lincoln Fitness</title>{% endblock %}
+
+{% block content %}
+    <img src="{{ url_for('static', filename = './personaltr 1.jpg')}}">
+    <div class="box">
+        <div class="card">
+            <h1>Membership Include</h1>
+            <ul>
+                <li>Unlimited 24/7 gym access</li>
+                <li>Lincoln gym with 1000+ machines and personal trainers</li>
+                <li>Free exercise classes</li>
+                <li>Free parking</li>
+                <li>Free Wi-Fi</li>
+                <li>And much more with only $60</li>
+                
+            </ul>
+            <a href="/Register" class="btn">Join Now</a>
+        </div>
+        <div class="card">
+            <h1>Personal training Include</h1>
+            <ul>
+                <li>1hour gym access</li>
+                <li>After you get membership you can book personal trainer</li>
+                <li>Free personal trainer for 1 hour</li>
+                <li>Free parking</li>
+                <li>Free Wi-Fi</li>
+                <li>And much more</li>
+                
+            </ul>
+            <a href="/Register" class="btn">Join Now</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+    
+    

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Update trainer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_member.css')}}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/member_details">Members</a></li>
+                <li><a href="/trainer_details">Trainers</a></li>
+                <li><a href="/class">Classes</a></li>
+                <li><a href="/report">Report</a></li>
+                <li><a href="/member_attendance">Attendance</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+
+
+
+    <div class="name">
+        <div class="box">
+            <div class="card">
+                <legend>Edit {{ trainer.firstName }} {{ trainer.lastName }} information</legend>
+
+                <form action="/trainer_update?trainerId={{ trainer.get('id') }}" method="post">
+
+                    <label for="firstName">FirstName</label>
+                    <input type="text" maxlength="32" name="firstName" pattern="[A-Za-z]{1,32}" id="firstname" value={{ trainer.get('firstName') }} readonly>
+
+                    <label for="lastName">LastName</label>
+                    <input type="text" name="lastName" id="lastName" value={{ trainer.get('lastName') }} readonly>
+
+                    <label for="speciality">Speciality</label>
+                    <input type="text" name="speciality" id="speciality" value={{ trainer.get('speciality') }}>
+
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" value={{ trainer.get('email') }} readonly>
+
+                    <label for="birthday">Birthday</label>
+                    <input type="date" name="birthday" id="birthday" value={{ trainer.get('birthday') }}>
+
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender">
+                        {% if trainer.get('gender') == 'Male' %}
+                            <option value="Male" selected>Male</option>
+                        {% else %}
+                            <option value="Male">Male</option>
+                        {% endif %}
+                        {% if trainer.get('gender') == 'Female' %}
+                            <option value="Female" selected>Female</option>
+                        {% else %}
+                            <option value="Female">Female</option>
+                        {% endif %}
+                    </select>
+
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" value="{{ trainer.get('address') }}">
+
+                    <label for="freetime">Free Time</label>
+                    <input type="text" name="freetime" id="freetime" value="{{ trainer.get('freetime') }}">
+
+                    <label for="cost">Cost</label>
+                    <input type="text" name="cost" id="cost" value={{ trainer.get('cost') }}>
+
+                    <p>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </p>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+        <p>privacy</p>
+        <p>Terms of service</p>
+        <p>Accessibility</p>
+        <div class="social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+    </footer>
+

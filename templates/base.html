@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% endblock %}
+    {% block title %}{% endblock %}
+    <script src="/static/scripts.js"></script>
+</head>
+<body>
+    <!-------------Nav------------>
+    {% block nav %}
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/Home">Home</a></li>
+                <li><a href="/Membership">Membership</a></li>
+                <li><a href="#">Contact (021 09080769)</a></li>
+            </ul>
+            <a href="/Login" class="btn">Login</a>
+        </nav>
+    </div>
+    {% endblock %}
+
+{% block content %}{% endblock %}
+<!-------------Footer-------------->
+    <footer>
+        <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+        <p>privacy</p>
+        <p>Terms of service</p>
+        <p>Accessibility</p>
+        <div class="social">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+    </footer>
+    <!---------x----Footer----x-------->
+
+</body>
+</html>

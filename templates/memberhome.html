@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='memberhome.css') }}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/memberhome_details">Details</a></li>
+                <li><a href="/mempageTrainerdetails">Trainers & Book specialised training</a></li>
+                <li><a href="/mempageClassdetails">Group Classes</a></li>
+                <li><a href="/memberhome_details/booked">Booked-classes</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+</head>
+    {% if  dbmember.get('newDate') == 'Unpaid' %}
+    <script>
+        alert("You haven't paid for your membership. Please pay within three days or your account will be unavailable.");
+    </script>
+    {% elif dbmember.get('newDate') == 'Expired' %}
+        <script>
+        alert("Your subscription is due. Please renew your subscription.");
+    </script>
+    {% endif %}
+
+    <form>
+        <div class="main">
+            <h1>Welcome </h1>
+            <h1 class="logo anim">{{ dbmember.get('firstName') }}<span>{{ dbmember.get('lastName') }}</span></h1>
+            <h1>By joining us, you've already taken the first step on your fitness journey.</h1>
+            <h1>We are happier to work with you on the path to achieve your health and fitness goals</h1>
+        </div>
+
+    </form>
+

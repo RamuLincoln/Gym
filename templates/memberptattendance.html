@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/member_details">Members</a></li>
+                <li><a href="/trainer_details">Trainers</a></li>
+                <li><a href="/class">Classes</a></li>
+                <li><a href="/report">Report</a></li>
+                <li><a href="/member_attendance">Attendance</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+    <style>
+        .name {
+            width: 100%;
+            height: 15vh;
+            background-image: none;
+            background-size: auto;
+            background-position: top;
+        }
+
+
+        .fixed_headers {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-decoration: underline;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            word-break: break-all;
+        }
+
+        td:nth-child(1), th:nth-child(1) {
+            width: 120px;
+        }
+
+        td:nth-child(2), th:nth-child(2) {
+            width: 110px;
+        }
+
+        td:nth-child(3), th:nth-child(3) {
+            width: 155px;
+        }
+
+        td:nth-child(4), th:nth-child(4) {
+            width: 120px;
+        }
+
+        td:nth-child(5), th:nth-child(5) {
+            width: 150px;
+        }
+
+        td:nth-child(6), th:nth-child(6) {
+            width: 130px;
+        }
+
+        td:nth-child(7), th:nth-child(7) {
+            width: 150px;
+        }
+
+        td:nth-child(8), th:nth-child(8) {
+            width: 150px;
+        }
+
+        td:nth-child(9), th:nth-child(9) {
+            width: 150px;
+        }
+
+        thead {
+            background-color: black;
+            color: white;
+        }
+
+        tr {
+            display: block;
+            position: relative;
+        }
+
+        tbody {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: 500px;
+        }
+
+        tr:nth-child(even) {
+            background-color: whitesmoke;
+        }
+
+        /* Search Section*/
+        .topnav {
+            overflow: hidden;
+            background-color: #d1d1d1;
+            height: 50px;
+        }
+
+        .topnav a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .topnav .search-container {
+            float: right;
+        }
+
+        .topnav input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+        }
+
+        .topnav .search-container button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .topnav .search-container button:hover {
+            background: #ccc;
+        }
+
+        .topnav input[type=text] {
+            border: 1px solid #ccc;
+        }
+
+        /* Search Section*/
+    </style>
+
+</head>
+
+<body>
+<h2>Personal Training Attendance</h2><br>
+<div class="topnav">
+    <div class="search-container">
+        <form id="gymSearch" action="{{ url_for('memberptattendance') }}" name="search" method="post" autocomplete="off">
+            <input type="text" placeholder="Search by attendance status" name="search" autocomplete="off">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Training Name</th>
+            <th>Trainer Name</th>
+            <th>Member Name</th>
+            <th>Training Date</th>
+            <th>Training Time</th>
+            <th>Attendance Status</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for item in dbmemberptattendance %}
+            <tr>
+                <td>{{ item.get('trainingname') }}</td>
+                <td>{{ item.get('tf') }} {{ item.get('tl') }}</td>
+                <td>{{ item.get('firstName') }}  {{ item.get('lastName') }}</td>
+                <td>{{ item.get('classdate') }}</td>
+                <td>{{ item.get('classtime') }}</td>
+                <td>{{ item.get('attendancestatus') }}</td>
+
+            </tr>
+        {% endfor %}
+       
+        </tbody>
+
+    </table>
+
+
+
+</body>
+</html>

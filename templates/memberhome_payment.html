@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='paymentspl.css')}}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/memberhome_details">Details</a></li>
+                <li><a href="/mempageTrainerdetails">Trainers & Book specialised training</a></li>
+                <li><a href="/mempageClassdetails">Group Classes</a></li>
+                <li><a href="/memberhome_details/booked">Booked-classes</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+</head>
+    <div class="row">
+        <div class="container">
+            <form id="payment" name="payment" action="/memberhome_details/payment?memberId={{ member.get('id') }}" method="post">
+                <h1>Hi, {{ member.get('firstName') }} {{ member.get('lastName') }}</h1>
+                <h1>Pay for your subscription</h1>
+                <label for="fname">Accepted Cards</label>
+                <div class="icon">
+                    <i class="fa-brands fa-cc-visa" style="color: #78C664;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="color: #78C664;"></i>
+                    <i class="fa-solid fa-credit-card" style="color: #78C664;"></i>
+                </div>
+                <label for="cname">Name on card</label>
+                <input type="text" name="cardname" id="cname" placeholder="Enroll name" required="required">
+
+
+                <label for="ccnum">Credit card number</label>
+                <input type="text" name="ccnum" id="ccnum" maxlength="16" placeholder="****-****-****-****" required="required">
+
+                <label for="paymentdate">Payment Date</label>
+                    <input type="text" name="paymentdate" id="paymentdate" value = {{ member.get('paymentdate') }} readonly>
+
+                     <label for="month">How Long(month)</label>
+                <select name="month" id="month" onchange="getPaymentAmount()">
+                    <option value="01">1</option>
+                    <option value="02">2</option>
+                    <option value="03">3</option>
+                </select>
+                <label for="paymentamount">Total Amount($)</label>
+                    <input type="text" name="paymentamount" id="paymentamount" value ="60" readonly>
+
+                <p>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+                </p>
+
+            </form>
+        </div>
+    </div>
+            <script>
+
+                function getPaymentAmount(){
+                    var paymentMonth = document.getElementById("month");
+                    var amount = parseInt(paymentMonth.value) * 60;
+                    document.getElementById("paymentamount").value=amount.toString()
+                }
+
+            </script>
+</body>
+
+<footer>
+    <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+    <p>privacy</p>
+    <p>Terms of service</p>
+    <p>Accessibility</p>
+    <div class="social">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    </div>
+</footer>
+
+
+</html>

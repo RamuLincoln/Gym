@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/member_details">Members</a></li>
+                <li><a href="/trainer_details">Trainers</a></li>
+                <li><a href="/class">Classes</a></li>
+                <li><a href="/report">Report</a></li>
+                <li><a href="/member_attendance">Attendance</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+    <style>
+        .name {
+            width: 100%;
+            height: 15vh;
+            background-image: none;
+            background-size: auto;
+            background-position: top;
+        }
+    </style>
+
+</head>
+
+<body>
+<h1>View the information if member attendance</h1><br>
+<h2>Classes Attendance: </h2>
+<a href="/memberclassattendance">Click to get detail</a><br><br>
+
+<h2>Gym Attendance: </h2>
+<a href="/membergymattendance">Click to get detail</a><br><br>
+<h2>Personal Training Attendance: </h2>
+<a href="/memberptattendance">Click to get detail</a><br><br>
+
+
+
+</body>
+</html>

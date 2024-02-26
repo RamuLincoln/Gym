@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='memberhome.css')}}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/memberhome_details">Details</a></li>
+                <li><a href="/mempageTrainerdetails">Trainers & Book specialised training</a></li>
+                <li><a href="/mempageClassdetails">Group Classes</a></li>
+                <li><a href="/memberhome_details/booked">Booked-classes</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+
+ <style>
+     .name {
+         width: 100%;
+         height: 15vh;
+         background-image: none;
+         background-size: auto;
+         background-position: top;
+     }
+
+
+     .fixed_headers {
+         width: 100%;
+         table-layout: fixed;
+         border-collapse: collapse;
+     }
+
+     th {
+         text-decoration: underline;
+     }
+
+     th, td {
+         padding: 8px;
+         text-align: left;
+         word-break: break-all;
+     }
+
+     td:nth-child(1), th:nth-child(1) {
+         width: 180px;
+     }
+
+     td:nth-child(2), th:nth-child(2) {
+         width: 130px;
+     }
+
+     td:nth-child(3), th:nth-child(3) {
+         width: 170px;
+     }
+
+     td:nth-child(4), th:nth-child(4) {
+         width: 200px;
+     }
+
+     td:nth-child(5), th:nth-child(5) {
+         width: 130px;
+     }
+
+     td:nth-child(6), th:nth-child(6) {
+         width: 160px;
+     }
+
+     td:nth-child(7), th:nth-child(7) {
+         width: 180px;
+     }
+
+     td:nth-child(8), th:nth-child(8) {
+         width: 150px;
+     }
+
+     td:nth-child(9), th:nth-child(9) {
+         width: 150px;
+     }
+
+     td:nth-child(10), th:nth-child(10) {
+         width: 150px;
+     }
+     thead {
+         background-color: black;
+         color: whitesmoke;
+     }
+
+     tr {
+         display: block;
+         position: relative;
+     }
+
+     tbody {
+         display: block;
+         overflow: auto;
+         width: 100%;
+         height: auto;
+     }
+
+     td {
+         background-color: whitesmoke;
+     }
+
+</style>
+
+</head>
+
+<body>
+<h2>{{ member.get('firstName') }} {{ member.get('lastName') }}--Information</h2><br>
+
+<div class="member-table">
+  <table class="fixed_headers">
+    <thead>
+    <tr>
+      <th>Member Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Birthday</th>
+      <th>Gender</th>
+      <th>Address</th>
+      <th>Health issues</th>
+      <th>Payment Date</th>
+      <th>Status</th>
+      <th>Edit</th>
+    </tr>
+    </thead>
+
+    <tbody>
+   <tr>
+      <td>{{ member.get('firstName') }} {{ member.get('lastName') }}</td>
+      <td>{{ member.get('phone') }}</td>
+      <td>{{ member.get('email') }}</td>
+      <td>{{ member.get('birthday') }}</td>
+      <td>{{ member.get('gender') }}</td>
+      <td>{{ member.get('address') }}</td>
+      <td>{{ member.get('healthIssues') }}</td>
+      <td>{{ member.get('paymentdate') }}</td>
+      <td>
+          <a href="/memberhome_details/payment?memberId={{ member.get('id') }}">{{ member.get('newDate') }}</a>
+      </td>
+      <td>
+        <a class= "gym-button gym-black gym-round-xlarge" href="/memberhome_details/update?memberId={{ member.get('id') }}" >Update</a>
+      </td>
+   </tr>
+  </tbody>
+   </table>
+</div>
+
+</body>
+</html>

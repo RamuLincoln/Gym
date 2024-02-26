@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+   {% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+   {% endblock %}
+   {% block title %}<title>Lincoln Fitness</title>{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <h1>Welcome to</h1><h1 class="logo anim">Lincoln <span>Fitness</span></h1>
+        <h1>Fitness is a lifestyle not a trend.</h1>
+        <h1>Get IN, Get FIT and Get on with life</h1>
+        <a href="/Register" class="btn">Register</a>
+    </div>
+
+    <div class="content">
+        <div class="equipment">
+            <h1>Equipment</h1>
+            <img src="{{ url_for('static', filename='equipment 5.jpg')}}">
+        </div>
+        <div class="trainer">
+            <h1>Trainer</h1>
+            <img src="{{ url_for('static', filename='./trainer 1.jpg')}}">
+            <p> Trainer Name : <span>Jack Ma</span> </p>
+            <p>You dont have to believe in yourself </p>
+            <p><span>Just believe in your trainer.</span></p>
+            <h1>Classes</h1>
+            <img src="{{ url_for('static', filename='./group workout 1.jpeg')}}">
+            <p>Group Name : <span>Group <Fitness></Fitness></span></p>
+            <p>Lincoln fitness runs a range of group classes led by experienced and passionate trainer and catering for level of fitness.</p>
+            <p>We also provide special training designed to help you reach fitness and health goals.</p>
+        </div>
+    </div>
+{% endblock %}

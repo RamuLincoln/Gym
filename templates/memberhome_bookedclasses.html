@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Admin.css') }}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/memberhome_details">Details</a></li>
+                <li><a href="/mempageTrainerdetails">Trainers & Book specialised training</a></li>
+                <li><a href="/mempageClassdetails">Group Classes</a></li>
+                <li><a href="/memberhome_details/booked">Booked-classes</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+    <style>
+        .name {
+            width: 100%;
+            height: 15vh;
+            background-image: none;
+            background-size: auto;
+            background-position: top;
+        }
+
+
+        .fixed_headers {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-decoration: underline;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            word-break: break-all;
+        }
+
+        td:nth-child(1), th:nth-child(1) {
+            width: 200px;
+        }
+
+        td:nth-child(2), th:nth-child(2) {
+            width: 160px;
+        }
+
+        td:nth-child(3), th:nth-child(3) {
+            width: 150px;
+        }
+
+        td:nth-child(4), th:nth-child(4) {
+            width: 150px;
+        }
+
+        td:nth-child(5), th:nth-child(5) {
+            width: 200px;
+        }
+
+        td:nth-child(6), th:nth-child(6) {
+            width: 170px;
+        }
+
+
+        thead {
+            background-color: black;
+            color: white;
+        }
+
+        tr {
+            display: block;
+            position: relative;
+        }
+
+        tbody {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: auto;
+        }
+
+        tr:nth-child(even) {
+            background-color: whitesmoke;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<h1>The classes you have been booked:</h1><br><br>
+<h2>Group Classes</h2><br>
+
+{% if dbBooked | length != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Trainer</th>
+            <th>Class Name</th>
+            <th>Class Date</th>
+            <th>Class Day</th>
+            <th>Class Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in dbBooked %}
+            <tr>
+                <td>{{ item.get('firstName') }} {{ item.get('lastName') }}</td>
+                <td>{{ item.get('classname') }}</td>
+                <td>{{ item.get('classdate') }}</td>
+                <td>{{ item.get('classday') }}</td>
+                <td>{{ item.get('classtime') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Class Name</th>
+            <th>Trainer</th>
+            <th>Class Date</th>
+            <th>Class Day</th>
+            <th>Class Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+
+<br><br><br>
+<h2>Personal Classes</h2><br>
+
+{% if dbPersonal | length != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Trainer</th>
+            <th>Speciality</th>
+            <th>Email</th>
+            <!--<th>Gender</th>-->
+            <th>Class Date</th>
+            <th>Class Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in dbPersonal %}
+            <tr>
+                <td>{{ item.get('firstName') }} {{ item.get('lastName') }}</td>
+                <td>{{ item.get('speciality') }}</td>
+                <td>{{ item.get('email') }}</td>
+                <!--<td>{{ item.get('gender') }}</td>-->
+                <td>{{ item.get('classdate') }}</td>
+                <td>{{ item.get('classtime') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Trainer</th>
+            <th>Speciality</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Class Date</th>
+            <th>Class Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Admin.css') }}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/trainerhome_details">Details</a></li>
+                <li><a href="/trainee">Trainee</a></li>
+                <li><a href="/traineeattendance">Class Attendance</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+    <style>
+        .name {
+            width: 100%;
+            height: 15vh;
+            background-image: none;
+            background-size: auto;
+            background-position: top;
+        }
+
+
+        .fixed_headers {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-decoration: underline;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            word-break: break-all;
+        }
+
+        td:nth-child(1), th:nth-child(1) {
+            width: 180px;
+        }
+
+        td:nth-child(2), th:nth-child(2) {
+
+            width: 180px;
+        }
+
+        td:nth-child(3), th:nth-child(3) {
+            width: 180px;
+        }
+
+        td:nth-child(4), th:nth-child(4) {
+            width: 180px;
+        }
+
+        td:nth-child(5), th:nth-child(5) {
+            width: 180px;
+        }
+
+        td:nth-child(6), th:nth-child(6) {
+            width: 150px;
+        }
+
+        td:nth-child(7), th:nth-child(7) {
+            width: 150px;
+        }
+
+        td:nth-child(8), th:nth-child(8) {
+            width: 150px;
+        }
+        
+        td:nth-child(9), th:nth-child(9) {
+            width: 150px;
+        }
+        
+        td:nth-child(10), th:nth-child(10) {
+            width: 150px;
+        }
+        
+        td:nth-child(11), th:nth-child(11) {
+            width: 150px;
+        }
+        
+        td:nth-child(12), th:nth-child(12) {
+            width: 150px;
+        }
+
+
+        thead {
+            background-color: black;
+            color: white;
+        }
+
+        tr {
+            display: block;
+            position: relative;
+        }
+
+        tbody {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: auto;
+        }
+
+        tr:nth-child(even) {
+            background-color: whitesmoke;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+<h2>Personalised Training Trainee</h2><br>
+
+{% if dbTrainee | length != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Email</th>
+            <!--<th>Health Issues</th>-->
+            <th>Training Name</th>
+            <th>Training Date</th>
+            <th>Training Time</th>
+            <th>Paymentdate</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in dbTrainee %}
+            <tr>
+                <td>{{ item.get('firstName') }} {{ item.get('lastName') }}</td>
+                <td>{{ item.get('email') }}</td>
+                <!--<td>{{ item.get('healthIssues') }}</td>-->
+                <td>{{ item.get('trainingname') }}</td>
+                <td>{{ item.get('classdate') }}</td>
+                <td>{{ item.get('classtime') }}</td>
+                <td>{{ item.get('paymentdate') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Birthday</th>
+            <th>Health Issues</th>
+            <th>Class Name</th>
+            <th>Class Date</th>
+            <th>Class Time</th>
+            <th>Payment Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br>
+
+<h2>Group Class Trainee </h2><br>
+{% if dbclassTrainee | length != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Member Name</th>
+            <th>Email</th>
+            <!--<th>Health Issues</th>-->
+            <th>Class Name</th>
+            <th>Class Date</th>
+            <th>Class Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in dbclassTrainee %}
+                <tr>
+                    <td>{{ item.get('firstName') }} {{ item.get('lastName') }}</td>
+                    <td>{{ item.get('email') }}</td>
+                    <!--<td>{{ item.get('healthIssues') }}</td>-->
+                    <td>{{ item.get('classname') }}</td>
+                    <td>{{ item.get('classdate') }}</td>
+                    <td>{{ item.get('classtime') }}</td>
+                </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+          <th>Member ID</th>
+          <th>Member Name</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Birthday</th>
+          <!--<th>Health Issues</th>-->
+          <th>Class Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %} 
+
+
+</body>
+</html>

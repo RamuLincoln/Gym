@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Admin.css') }}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/member_details">Members</a></li>
+                <li><a href="/trainer_details">Trainers</a></li>
+                <li><a href="/class">Classes</a></li>
+                <li><a href="/report">Report</a></li>
+                <li><a href="/member_attendance">Attendance</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+    <style>
+        .name {
+            width: 100%;
+            height: 15vh;
+            background-image: none;
+            background-size: auto;
+            background-position: top;
+        }
+
+
+        .fixed_headers {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-decoration: underline;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            word-break: break-all;
+        }
+
+        td:nth-child(1), th:nth-child(1) {
+            width: 200px;
+        }
+
+        td:nth-child(2), th:nth-child(2) {
+            width: 180px;
+        }
+
+        td:nth-child(3), th:nth-child(3) {
+            width: 200px;
+        }
+
+        td:nth-child(4), th:nth-child(4) {
+            width: 200px;
+        }
+
+        td:nth-child(5), th:nth-child(5) {
+            width: 190px;
+        }
+
+        td:nth-child(6), th:nth-child(6) {
+            width: 150px;
+        }
+
+        td:nth-child(7), th:nth-child(7) {
+            width: 150px;
+        }
+
+        td:nth-child(8), th:nth-child(8) {
+            width: 150px;
+        }
+
+        td:nth-child(9), th:nth-child(9) {
+            width: 150px;
+        }
+
+        td:nth-child(10), th:nth-child(10) {
+            width: 150px;
+        }
+
+        td:nth-child(11), th:nth-child(11) {
+            width: 150px;
+        }
+
+        td:nth-child(12), th:nth-child(12) {
+            width: 150px;
+        }
+
+
+        thead {
+            background-color: black;
+            color: white;
+        }
+
+        tr {
+            display: block;
+            position: relative;
+        }
+
+        tbody {
+            display: block;
+            overflow: auto;
+            width: 100%;
+            height: auto;
+        }
+
+        tr:nth-child(even) {
+            background-color: whitesmoke;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="search-container" align="center">
+    <form id="text" name="startdate" action="{{ url_for('report') }}" method="post"
+          autocomplete="off">
+        <div><h1>Revenue Report</h1></div>
+        <label for="startdate">Startdate</label>
+        <input type="date" name="startdate" id="startdate">&nbsp;<span>&nbsp;-&nbsp;</span>
+        <label for="enddate">Enddate</label>
+        <input type="date" name="enddate" id="enddate">
+        <input type="submit" value="Submit">
+        {% if startdate and enddate %}<br><p>( {{ startdate}} -- {{ enddate}})</p>{% endif %}
+    </form>
+</div>
+<br><br>
+
+<h2>Total Revenue</h2>
+{% if dbpayments != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>
+                Total Revenue: ${{ dbpayments }}
+            </th>
+        </tr>
+        </thead>
+        {#    <tbody>#}
+        {#    {% for item in dbpayments %}#}
+        {#            <tr>#}
+        {#                <td>${{ item.get('totalrevenue') }}</td>#}
+        {#                <!--<td>{{ item.get('sum(amount)') }}</td>-->#}
+        {#            </tr>#}
+        {#            #}
+        {#    {% endfor %}#}
+        {#    </tbody>#}
+    </table>
+{% endif %}
+<br><br>
+
+<h2>Personalised Training Payment</h2>
+{% if dbTrainee | length != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <!--<th>Member ID</th>-->
+            <th>Name</th>
+            <th>Speciality</th>
+            <th>Class Date</th>
+            <th>Class Time</th>
+            <th>Payment date</th>
+            <th>Training Cost</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in dbTrainee %}
+            <tr>
+                <!--<td>{{ item.get('id') }}</td>-->
+                <td>{{ item.get('firstName') }} {{ item.get('lastName') }}</td>
+                <td>{{ item.get('trainingname') }}</td>
+                <td>{{ item.get('classdate') }}</td>
+                <td>{{ item.get('classtime') }}</td>
+                <td>{{ item.get('paymentdate') }}</td>
+                <td>${{ item.get('trainingcost') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Speciality</th>
+            <th>Class Date</th>
+            <th>Class Time</th>
+            <th>Payment date</th>
+            <th>Training Cost</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+{% if dbPTbooking  != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Personal training : ${{ dbPTbooking }}
+            </th>
+        </tr>
+        </thead>
+        {#        <tbody>#}
+        {#        {% for item in dbPTbooking %}#}
+        {#            <tr>#}
+        {#                <td>${{ item.get('sum(trainingcost)') }}</td>#}
+        {#            </tr>#}
+        {##}
+        {#        {% endfor %}#}
+        {#        </tbody>#}
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Amount: None</th>
+        </tr>
+        </thead>
+{#        <tbody>#}
+{#        <tr>#}
+{#            <td>None</td>#}
+{#        </tr>#}
+{#        </tbody>#}
+    </table>
+{% endif %}
+
+
+<br><br>
+
+<h2>Membership Payment </h2>
+{% if dbpayment | length != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <!--<th>Member ID</th>-->
+            <th>Name</th>
+            <th>Payment date</th>
+            <th>Payment amount</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in dbpayment %}
+            <tr>
+                <!--<td>{{ item.get('memberid') }}</td>-->
+                <td>{{ item.get('firstName') }} {{ item.get('lastName') }}</td>
+                <td>{{ item.get('paymentdate') }}</td>
+                <td>${{ item.get('paymentamount') }}</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Payment date</th>
+            <th>Payment amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+{% if dbpay  != 0 %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Membership : ${{ dbpay}}
+            </th>
+        </tr>
+        </thead>
+        {#        <tbody>#}
+        {#        {% for item in dbpay %}#}
+        {#            <tr>#}
+        {#                <td>${{ item.get('sum(paymentamount)') }}</td>#}
+        {#            </tr>#}
+        {##}
+        {#        {% endfor %}#}
+        {#        </tbody>#}
+    </table>
+{% else %}
+    <table class="fixed_headers">
+        <thead>
+        <tr>
+            <th>Amount: None</th>
+        </tr>
+        </thead>
+{#        <tbody>#}
+{#        <tr>#}
+{#            <td>None</td>#}
+{#        </tr>#}
+{#        </tbody>#}
+    </table>
+{% endif %} 
+

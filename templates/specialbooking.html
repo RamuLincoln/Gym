@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+   {% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_member.css')}}">
+   {% endblock %}
+   {% block title %}<title>Book trainer</title>{% endblock %}
+{% block nav %}
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/memberhome_details">Details</a></li>
+                <li><a href="/mempageTrainerdetails">Trainers & Book specialised training</a></li>
+                <li><a href="/mempageClassdetails">Group Classes</a></li>
+                <li><a href="/memberhome_details/booked">Booked-classes</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+{% endblock %}
+{% block content %}
+      <div class="name">
+        <div class="box">
+            <div class="card">
+                <legend>Book {{trainer.firstName}} {{trainer.lastName}} Trainer</legend>
+
+                <form id="specialbooking" name="specialbooking" action="/specialbooking?trainerId={{ trainer.get('id') }}" onsubmit="return onRegisterSubmit();" method="post">
+
+                    <label for="memberName">Member Name</label>
+                    <input type="text" name="memberName" id="memberName" value='{{ dbmember.get('firstName') }} {{ dbmember.get('lastName') }}' readonly>
+    
+                  
+                    <!--<label hidden for="TrainerID">TrainerID</label>-->
+                    <input type="hidden" name="TrainerID" id="TrainerID" placeholder="TrainerID" value={{ trainer.get('id') }}>
+    
+                    
+                    <label for="speciality">TainingName</label>
+                    <input type="text" name="trainingname" id="trainingname" placeholder="Enter speciality" value={{ trainer.get('speciality') }} readonly>
+                    
+                    
+                    <label for="paymentdate">Payment Date</label>
+                    <input type="date" name="paymentdate" id="paymentdate" value={{ currentdate }} readonly>
+
+                    <label for="trainingcost">Amount($)</label>
+                    <input type="text" name="trainingcost" id="trainingcost" value ={{ trainer.get('cost') }} readonly>
+
+                    <label for="classdate">classdate</label>
+                    <input type="date"  name="classdate" id="classdate" min={{ currentdate }} required="required">
+
+                    <label for="classtime">classtime</label>
+                    <select name="classtime" id="classtime">
+                    <option value="{{ trainer.get('freetime') }}">{{ trainer.get('freetime') }}</option>
+                    </select>
+                    
+
+                    <!--<option value="Unpaid">Unpaid</option>
+                    </select>-->
+
+
+                    <!--<label for="classtime">classtime</label>
+                    <input type="time"  name="classtime" id="classtime" required="required" value={{ trainer.get('freetime') }}>
+
+                    <label for="AttendanceStatus">AttendanceStatus</label>
+                    <input type="text" name="AttendanceStatus" id="AttendanceStatus" placeholder="AttendanceStatus">-->
+                    
+    
+                    <p>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </p>
+                </form>
+            <script>function isOver14(classdate) {
+                // find the date 18 years ago
+                const date14 = new Date();
+                date14.setDate(date14.getDate() + 14);
+                // check if the date of birth is before that date
+                return classdate <= date14;
+              }
+              function onRegisterSubmit()
+              {
+                var classdate = document.forms.specialbooking.classdate.value;
+                var over14 = isOver14(new Date(classdate));
+                if(!over14)
+                {
+                  alert("Book only upto 14 days");
+                  return false;
+                }
+                alert("Booking submitted successfully after you pay the amount!")
+                return true;
+              }
+                  
+            </script>
+
+            </div>
+        </div>
+      </div>
+
+{% endblock %}
+

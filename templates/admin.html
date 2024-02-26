@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Lincoln Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Admin.css')}}">
+
+    <div class="name">
+        <nav class="navbar navbar-default navbar-static-top">
+            <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+            <ul>
+                <li><a href="/member_details">Members</a></li>
+                <li><a href="/trainer_details">Trainers</a></li>
+                <li><a href="/class">Classes</a></li>
+                <li><a href="/report">Report</a></li>
+                <li><a href="/member_attendance">Attendance</a></li>
+            </ul>
+            <a href="/Home" class="btn">Log out</a>
+        </nav>
+    </div>
+
+    <div class="main">
+        <h1>Welcome </h1><h1 class="logo anim">Admin/<span>Manager</span></h1>
+        <h3>Love fitness and being at the Lincoln Fitness </h3>
+        <h3>As wellness trends continue to be very popular </h3>
+        <h3>there is always a need for professionl like you to manage a fitness club and</h3>
+        <h3>all of its function</h3>
+    </div>

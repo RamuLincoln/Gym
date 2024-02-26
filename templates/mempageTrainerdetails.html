@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Lincoln Fitness</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css')}}">
+
+  <div class="name">
+    <nav class="navbar navbar-default navbar-static-top">
+      <h1 class="logo anim">Lincoln<span>Fitness</span></h1>
+      <ul>
+        <li><a href="/memberhome_details">Details</a></li>
+        <li><a href="/mempageTrainerdetails">Trainers & Book specialised training</a></li>
+        <li><a href="/mempageClassdetails">Group Classes</a></li>
+        <li><a href="/memberhome_details/booked">Booked-classes</a></li>
+      </ul>
+      <a href="/Home" class="btn">Log out</a>
+    </nav>
+  </div>
+  <style>
+    .name {
+      width: 100%;
+      height: 15vh;
+      background-image: none;
+      background-size: auto;
+      background-position: top;
+    }
+
+
+    .fixed_headers {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-decoration: underline;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      word-break: break-all;
+    }
+
+    td:nth-child(1),
+    th:nth-child(1) {
+      width: 100px;
+    }
+
+    td:nth-child(2),
+    th:nth-child(2) {
+      width: 140px;
+    }
+
+    td:nth-child(3),
+    th:nth-child(3) {
+      width: 150px;
+    }
+
+    td:nth-child(4),
+    th:nth-child(4) {
+      width: 150px;
+    }
+
+    td:nth-child(5),
+    th:nth-child(5) {
+      width: 210px;
+    }
+
+    td:nth-child(6),
+    th:nth-child(6) {
+      width: 120px;
+    }
+
+    td:nth-child(7),
+    th:nth-child(7) {
+      width: 150px;
+    }
+
+    td:nth-child(8),
+    th:nth-child(8) {
+      width: 150px;
+    }
+
+    td:nth-child(9),
+    th:nth-child(9) {
+      width: 110px;
+    }
+
+    thead {
+      background-color: black;
+      color: white;
+    }
+
+    tr {
+      display: block;
+      position: relative;
+    }
+
+    tbody {
+      display: block;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+
+    tr:nth-child(even) {
+      background-color: whitesmoke;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h2>Trainers Information</h2><br>
+  <div class="topnav">
+    <div class="search-container">
+      <form id="trainerSearch" action="{{ url_for('mempageTrainerdetails') }}" name="search" method="post" autocomplete="off">
+        <input type="text" placeholder="Search.." name="search" autocomplete="off">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+  <div class="trainer-details">
+    <table class="fixed_headers">
+      <thead>
+        <tr>
+          <th>Trainer ID</th>
+          <th>Trainer Name</th>
+          <th>Speciality</th>
+          <!--<th>Phone</th>-->
+          <th>Email</th>
+          <th>Free Time</th>
+          <th>Amount</th>
+          <!--<th>Birthday</th>
+          <th>Gender</th>
+          <th>Address</th>-->
+          <th>Book</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for item in dbTrainer %}
+        <tr>
+          <td>{{ item.get('id') }}</td>
+          <td>{{ item.get('firstName') }} {{ item.get('lastName') }}</td>
+          <td>{{ item.get('speciality') }}</td>
+          <!--<td>{{ item.get('phone') }}</td>-->
+          <td>{{ item.get('email') }}</td>
+          <td>{{ item.get('freetime') }}</td>
+          <td>${{ item.get('cost') }}</td>
+          <!--<td>{{ item.get('birthday') }}</td>
+          <td>{{ item.get('gender') }}</td>
+          <td>{{ item.get('address') }}</td>-->
+          <td>
+            <a class= "gym-button gym-black-delete gym-round-xlarge" href="/specialbooking?trainerId={{ item.get('id') }}">Booking</a>
+            <!--<a href="/trainer_delete?trainerId={{ item.get('id') }}">Delete</a>-->
+          </td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td>......</td>
+          <td>......</td>
+          <td>......</td>
+          <td>......</td>
+          <td>......</td>
+          <td>......</td>
+          <td>......</td>
+          <!--<td>......</td>
+          <td>......</td>-->
+          <td>
+            <!--<a href="/trainer_add" >Add</a>-->
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</body>
+
+</html>

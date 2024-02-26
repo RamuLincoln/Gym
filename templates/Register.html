@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+   {% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_member.css')}}">
+   {% endblock %}
+   {% block title %}<title>Member Register</title>{% endblock %}
+
+{% block content %}
+      <div class="name">
+        <div class="box">
+            <div class="card">
+                <legend>Please fill up the form</legend>
+
+        <form id="AddMember" name="AddMember" action="/Register" onsubmit="return onRegisterSubmit();" method="post">
+                <label for="firstName">FirstName</label>
+                <input type="text" maxlength="32" name="firstName" pattern="[A-Z a-z]{1,32}" id="firstname" placeholder="Enter firstname"  required="required">
+
+
+                <label for="lastName">LastName</label>
+                <input type="text" maxlength="32" name="lastName" pattern="[A-Z a-z]{1,32}" id="lastName" placeholder="Enter firstname"  required="required">
+
+
+                <label for="phone">Phone</label>
+                <input type="text"  name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{5}" id="phone" placeholder="(nnn) nnn-nnnnn">
+
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="abc@gmail.com" required="required">
+
+
+                <label for="birthday">Birthday</label>
+                <input type="date"  name="birthday" id="birthday" required="required">
+
+
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                </select>
+
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" required="required">
+
+
+                <label for="healthIssues">Health Issues</label>
+                <input type="text" name="healthIssues" id="healthIssues" required="required">
+
+            <p>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </p>
+
+        </form>
+    </div>
+        </div>
+    </div>
+
+
+{% endblock %}
